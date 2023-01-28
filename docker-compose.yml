@@ -90,7 +90,31 @@ services:
       - 7359:7359/udp #optional
       - 1900:1900/udp #optional
     restart: unless-stopped
-
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Amsterdam
+    volumes:
+      - ./data/config/bazarr:/config
+      - ./data/library/movies:/movies #optional
+      - ./data/library/tv:/tv #optional
+    ports:
+      - 6767:6767
+    restart: unless-stopped
+  jellyseerr:
+    image: fallenbagel/jellyseerr:latest
+    container_name: jellyseerr
+    environment:
+      - LOG_LEVEL=debug
+      - TZ=Europe/Amsterdam
+    ports:
+      - 5055:5055
+    volumes:
+      - ./data/config/jellyseerr:/app/config
+    restart: unless-stopped
 volumes:
   caddy_data:
   caddy_config:
