@@ -1,0 +1,10 @@
+{
+	email me@stingalleman.nl
+}
+
+import /conf/*.config
+# import /conf/snippets/*.caddyfile
+
+http://:1990 {
+	metrics /metrics
+}
